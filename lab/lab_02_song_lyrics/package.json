@@ -2,12 +2,13 @@
   "name": "lab_02_song_lyrics",
   "version": "1.0.0",
   "description": "This is a demo that reads text files from your local song_lyrics folder and displays their contents through a local Express web server.",
-  "main": "app.js",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^5.1.0"
   }
