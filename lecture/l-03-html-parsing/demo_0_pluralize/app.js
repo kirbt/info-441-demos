@@ -1,6 +1,8 @@
 import {promises as fs} from 'fs'
 import pluralize from 'pluralize';
 import express from 'express'
+import fetch from 'node-fetch'
+import parser from 'node-html-parser'
 const app = express()
 
 app.get('/', async (req, res) => {
@@ -36,6 +38,35 @@ app.get('/api/pluralize', async (req, res) => {
     let pluralWord = pluralize(inputWord)
     res.type("txt")
     res.send(pluralWord)
+})
+
+app.get('/api/find-img-tags', async (req, res) => {
+    let link = req.query.link
+    const response = await fetch(link)
+    const html = await response.text()
+
+    const roothtml = parser.parse(html)
+    const images = roothtml.querySelectorAll('img')
+    console.log(roothtml)
+    console.log(`images: ${images}`)
+
+    let resultHtml = '<html><body><h2>Images with alt text</h2>'
+
+
+    for (let img of images) {
+        console.log(img)
+        if (img.getAttribute('alt') !== null) {
+            let src = img.getAttribute('src')
+            let alt = img.getAttribute('alt')
+            console.log(`img found | src = ${src} | alt = ${alt}`)
+            resultHtml += `<div><img src="${src}" alt="${alt}" /><p>Alt: ${alt}</p></div>`;
+            resultHtml += '</body></html>';
+        }
+    }
+
+    res.type('html')
+    res.send(resultHtml)
+
 })
 
 app.listen(3000, () => {
