@@ -25,6 +25,13 @@ async function createUser(){
     })
 }
 
+async function getUsers(){
+    let response = await fetch("/api/users")
+    let userData = await response.json()
+
+    document.getElementById("results").innerHTML = JSON.stringify(userData)
+}
+
 
 // async function getPterosaurs(){
 //     let response = await fetch("api/getPterosaurs")

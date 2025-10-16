@@ -3,8 +3,10 @@ import express from 'express';
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', async function(req, res, next) {
+  let userInfo = await fs.readFile("data/usersData.json")
+  res.type("json")
+  res.send(userInfo)
 });
 
 router.post('/', async (req, res) => {
