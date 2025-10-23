@@ -9,7 +9,7 @@ async function createUser() {
         "favorite_ice_cream": favorite_ice_cream
     }
 
-    let resposne = await fetch('/api/users', {
+    let response = await fetch('/api/users', {
         method: 'POST',
         body: JSON.stringify(myData),
         headers: {
