@@ -11,10 +11,10 @@ import WebAppAuthProvider from 'msal-node-wrapper'
 
 const authConfig = {
     auth: {
-    	clientId: "Client ID or Application ID HERE",
-    	authority: "https://login.microsoftonline.com/Paste_the_Tenant_directory_ID_Here",
-    	clientSecret: "Client or Application secret here (NOT THE 'secret id', but the 'secret value')",
-    	redirectUri: "/redirect"
+        clientId: "Client ID or Application ID HERE",
+        authority: "https://login.microsoftonline.com/Paste_the_Tenant_directory_ID_Here",
+        clientSecret: "Client or Application secret here (NOT THE 'secret id', but the 'secret value')",
+        redirectUri: "/redirect"
     },
 	system: {
     	loggerOptions: {
