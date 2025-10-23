@@ -22,6 +22,8 @@ db.serialize(() => {
     .run(`INSERT INTO secret_table(message)
         VALUES ('The password for Kyle is: pa55w0rd'),
                ('The treasure is hidden on the 5th floor')
+               ('Operation treadstone has been shut down'),
+               ('You also get this bonus message that was not in the lecture code!')
       `)
 })
 
