@@ -1,0 +1,16 @@
+{
+  "name": "lab_06_websockets",
+  "version": "1.0.0",
+  "description": "This is a demo that performs a live chat feature using Express's websockets.",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-ws": "^5.0.2"
+  }
+}
