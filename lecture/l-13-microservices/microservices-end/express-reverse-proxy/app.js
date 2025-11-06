@@ -53,7 +53,7 @@ app.get('/api/square', (req, res) => {
 // forward any other requests to the react server on port 4000
 const reactProxyMiddleware = createProxyMiddleware({
     target: 'http://localhost:4000',
-    pathRewrite: (path, req) => req.baseUrl,
+    pathRewrite: (path, req) => req.baseUrl, // this line may be necessary (windows?) or need to be removed (mac?)
     changeOrigin: true
 })
 
