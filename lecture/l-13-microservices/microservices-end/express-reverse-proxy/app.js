@@ -57,6 +57,6 @@ const reactProxyMiddleware = createProxyMiddleware({
     changeOrigin: true
 })
 
-app.use('/*', reactProxyMiddleware)
+app.use(/.*/, reactProxyMiddleware)
 
 export default app;
