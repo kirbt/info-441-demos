@@ -31,14 +31,19 @@ async function loadCart(){
             <strong>Count</strong> ${itemInfo.itemCount}
         </div>`
     }).join("<hr>")
+
+
+    items = cartJson.map(itemInfo => {
+      return{
+        id: itemInfo._id,
+        amount: totalCost
+      }
+    })
     
     document.getElementById("yourcartdiv").innerHTML = cartHTML;
     document.getElementById("total_price").innerText = totalCost;
 }
 
-
-// From Stripe Custom Flow tutorial: https://stripe.com/docs/payments/quickstart
-// changed endpoint to: "/items/create-payment-intent
 
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
@@ -46,12 +51,9 @@ async function loadCart(){
 const stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 // The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
+let items
 
 let elements;
-
-// initialize();
-// checkStatus();
 
 document
   .querySelector("#payment-form")
@@ -72,7 +74,7 @@ async function initialize() {
   elements = stripe.elements({ appearance, clientSecret });
 
   const paymentElementOptions = {
-    layout: "tabs",
+    layout: "accordion",
   };
 
   const paymentElement = elements.create("payment", paymentElementOptions);
@@ -87,7 +89,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://localhost:3000/checkout.html",
+      return_url: location.origin + "/complete.html",
     },
   });
 
@@ -103,34 +105,6 @@ async function handleSubmit(e) {
   }
 
   setLoading(false);
-}
-
-// Fetches the payment intent status after payment submission
-async function checkStatus() {
-  const clientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-  );
-
-  if (!clientSecret) {
-    return;
-  }
-
-  const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
-
-  switch (paymentIntent.status) {
-    case "succeeded":
-      showMessage("Payment succeeded!");
-      break;
-    case "processing":
-      showMessage("Your payment is processing.");
-      break;
-    case "requires_payment_method":
-      showMessage("Your payment was not successful, please try again.");
-      break;
-    default:
-      showMessage("Something went wrong.");
-      break;
-  }
 }
 
 // ------- UI helpers -------
